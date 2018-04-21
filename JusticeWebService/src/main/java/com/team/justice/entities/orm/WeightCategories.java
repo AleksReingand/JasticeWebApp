@@ -1,5 +1,7 @@
 package com.team.justice.entities.orm;
 
-public class Coordimates {
+public class WeightCategories {
+	
+	
 
 }

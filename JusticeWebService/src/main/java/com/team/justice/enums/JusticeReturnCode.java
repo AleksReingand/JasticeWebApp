@@ -1,5 +1,5 @@
 package com.team.justice.enums;
 
-public enum JusticeEnums {
-
+public enum JusticeReturnCode {
+	OK
 }
