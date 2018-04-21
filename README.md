@@ -1,0 +1,2 @@
+# JasticeWebApp
+Application for competitions.
