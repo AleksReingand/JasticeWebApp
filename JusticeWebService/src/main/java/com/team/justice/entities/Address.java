@@ -13,8 +13,8 @@ public class Address implements Serializable {
 	 */
 	private static final long serialVersionUID = 6961186160218442876L;
 
-	@Id
-	CoordinatesId coordinatesId;
+	@EmbeddedId
+	private CoordinatesId id;
 
 	String country;
 	String city;
@@ -25,14 +25,29 @@ public class Address implements Serializable {
 	
 	@OneToMany(mappedBy = "address")
 	List<Club> clubs;
+	
+	
 
-	public CoordinatesId getCoordinatesId() {
-		return coordinatesId;
+	public Address() {
+		super();
+	}
+	
+	
+
+	public Address(CoordinatesId id, String country, String city, String state, String street, int building,
+			String housing, List<Club> clubs) {
+		super();
+		this.id = id;
+		this.country = country;
+		this.city = city;
+		this.state = state;
+		this.street = street;
+		this.building = building;
+		this.housing = housing;
+		this.clubs = clubs;
 	}
 
-	public void setCoordinatesId(CoordinatesId coordinatesId) {
-		this.coordinatesId = coordinatesId;
-	}
+
 
 	public String getCountry() {
 		return country;
@@ -96,7 +111,7 @@ public class Address implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Address [coordinatesId=" + coordinatesId + ", country=" + country + ", city=" + city + ", state="
+		return "Address [country=" + country + ", city=" + city + ", state="
 				+ state + ", street=" + street + ", building=" + building + ", housing=" + housing + ", clubs=" + clubs
 				+ "]";
 	}

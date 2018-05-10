@@ -1,7 +1,9 @@
 package com.team.justice.handler;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.team.justice.api.dto.AddressDto;
@@ -11,11 +13,11 @@ import com.team.justice.api.dto.CouchDto;
 import com.team.justice.api.enums.ReturnCode;
 import com.team.justice.interfaces.IJustice;
 
+@Repository
 public class JusticeHandler implements IJustice {
+	@PersistenceContext
+	EntityManager em;
 
-	protected EntityManager em;
-
-	
 	@Override
 	@Transactional
 	public ReturnCode addNewCouch(CouchDto couch) {
