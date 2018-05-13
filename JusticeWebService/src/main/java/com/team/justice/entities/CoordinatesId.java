@@ -19,12 +19,6 @@ public class CoordinatesId implements Serializable {
 		super();
 	}
 
-	public CoordinatesId(double lon, double lat) {
-		super();
-		this.lon = lon;
-		this.lat = lat;
-	}
-
 	public double getLon() {
 		return lon;
 	}

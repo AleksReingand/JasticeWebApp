@@ -13,10 +13,10 @@ public class Club implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 7687675403066064279L;
-	
+
 	@EmbeddedId
 	private ClubId id;
-	
+
 	@ManyToOne
 	Address address;
 	@OneToMany(mappedBy = "club")
@@ -27,7 +27,6 @@ public class Club implements Serializable {
 	public Club() {
 		super();
 	}
-	
 
 	public Club(ClubId id, Address address, List<Couch> couches, List<Athlete> athletes) {
 		super();
@@ -37,6 +36,13 @@ public class Club implements Serializable {
 		this.athletes = athletes;
 	}
 
+	public ClubId getId() {
+		return id;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
 
 	public List<Couch> getCouches() {
 		return couches;

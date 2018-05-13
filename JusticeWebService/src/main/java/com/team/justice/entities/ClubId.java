@@ -19,6 +19,12 @@ public class ClubId implements Serializable {
 		super();
 	}
 
+	public ClubId(String title, String nameCity) {
+		super();
+		this.title = title;
+		this.nameCity = nameCity;
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -74,7 +80,5 @@ public class ClubId implements Serializable {
 	public String toString() {
 		return "ClubId [title=" + title + ", nameCity=" + nameCity + "]";
 	}
-
-	
 
 }

@@ -17,8 +17,9 @@ public class Athlete implements Serializable {
 	String passport;
 	String firstName;
 	String secondName;
+	String birthday;
 	String phone;
-	String eMail;
+	String email;
 	boolean gender;
 	double weigth;
 	@ManyToOne
@@ -28,6 +29,22 @@ public class Athlete implements Serializable {
 
 	public Athlete() {
 		super();
+	}
+
+	public Athlete(String nickName, String passport, String firstName, String secondName, String birthday, String phone,
+			String email, boolean gender, double weigth, Couch couch, Club club) {
+		super();
+		this.nickName = nickName;
+		this.passport = passport;
+		this.firstName = firstName;
+		this.secondName = secondName;
+		this.birthday = birthday;
+		this.phone = phone;
+		this.email = email;
+		this.gender = gender;
+		this.weigth = weigth;
+		this.couch = couch;
+		this.club = club;
 	}
 
 	public String getPassport() {
@@ -54,6 +71,18 @@ public class Athlete implements Serializable {
 		this.secondName = secondName;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getBirthday() {
+		return birthday;
+	}
+
 	public String getPhone() {
 		return phone;
 	}
@@ -63,11 +92,11 @@ public class Athlete implements Serializable {
 	}
 
 	public String geteMail() {
-		return eMail;
+		return email;
 	}
 
-	public void seteMail(String eMail) {
-		this.eMail = eMail;
+	public void seteMail(String email) {
+		this.email = email;
 	}
 
 	public double getWeigth() {
@@ -109,8 +138,8 @@ public class Athlete implements Serializable {
 	@Override
 	public String toString() {
 		return "Athlete [nickName=" + nickName + ", passport=" + passport + ", firstName=" + firstName + ", secondName="
-				+ secondName + ", phone=" + phone + ", eMail=" + eMail + ", gender=" + gender + ", weigth=" + weigth
-				+ ", couch=" + couch + ", club=" + club + "]";
+				+ secondName + ", birthday=" + birthday + ", phone=" + phone + ", email=" + email + ", gender=" + gender
+				+ ", weigth=" + weigth + ", couch=" + couch + ", club=" + club + "]";
 	}
 
 }

@@ -22,32 +22,13 @@ public class Address implements Serializable {
 	String street;
 	int building;
 	String housing;
-	
+
 	@OneToMany(mappedBy = "address")
 	List<Club> clubs;
-	
-	
 
 	public Address() {
 		super();
 	}
-	
-	
-
-	public Address(CoordinatesId id, String country, String city, String state, String street, int building,
-			String housing, List<Club> clubs) {
-		super();
-		this.id = id;
-		this.country = country;
-		this.city = city;
-		this.state = state;
-		this.street = street;
-		this.building = building;
-		this.housing = housing;
-		this.clubs = clubs;
-	}
-
-
 
 	public String getCountry() {
 		return country;
@@ -111,9 +92,8 @@ public class Address implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Address [country=" + country + ", city=" + city + ", state="
-				+ state + ", street=" + street + ", building=" + building + ", housing=" + housing + ", clubs=" + clubs
-				+ "]";
+		return "Address [country=" + country + ", city=" + city + ", state=" + state + ", street=" + street
+				+ ", building=" + building + ", housing=" + housing + ", clubs=" + clubs + "]";
 	}
 
 }

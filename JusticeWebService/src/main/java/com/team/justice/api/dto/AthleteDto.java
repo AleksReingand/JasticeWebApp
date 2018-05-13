@@ -6,26 +6,35 @@ public class AthleteDto {
 	public String passport;
 	public String firstName;
 	public String secondName;
+	public String birthday;
 	public String phone;
-	public String eMail;
+	public String email;
 	public boolean gender;
 	public double weigth;
+	public String firstNameCouch;
+	public String secondNameCouch;
+	public String clubName;
 
 	public AthleteDto() {
 		super();
 	}
 
-	public AthleteDto(String nickName, String passport, String firstName, String secondName, String phone, String eMail,
-			boolean gender, double weigth) {
+	public AthleteDto(String nickName, String passport, String firstName, String secondName, String birthday,
+			String phone, String email, boolean gender, double weigth, String firstNameCouch, String secondNameCouch,
+			String clubName) {
 		super();
 		this.nickName = nickName;
 		this.passport = passport;
 		this.firstName = firstName;
 		this.secondName = secondName;
+		this.birthday = birthday;
 		this.phone = phone;
-		this.eMail = eMail;
+		this.email = email;
 		this.gender = gender;
 		this.weigth = weigth;
+		this.firstNameCouch = firstNameCouch;
+		this.secondNameCouch = secondNameCouch;
+		this.clubName = clubName;
 	}
 
 	public String getNickName() {
@@ -44,12 +53,16 @@ public class AthleteDto {
 		return secondName;
 	}
 
+	public String getBirthday() {
+		return birthday;
+	}
+
 	public String getPhone() {
 		return phone;
 	}
 
-	public String geteMail() {
-		return eMail;
+	public String getEmail() {
+		return email;
 	}
 
 	public boolean isGender() {
@@ -59,5 +72,19 @@ public class AthleteDto {
 	public double getWeigth() {
 		return weigth;
 	}
+
+	public String getFirstNameCouch() {
+		return firstNameCouch;
+	}
+
+	public String getSecondNameCouch() {
+		return secondNameCouch;
+	}
+
+	public String getClubName() {
+		return clubName;
+	}
+
+	
 
 }

@@ -18,7 +18,7 @@ public class Couch implements Serializable {
 	String firstName;
 	String secondName;
 	String phone;
-	String eMail;
+	String email;
 	String skype;
 	@ManyToOne
 	Club club;
@@ -27,6 +27,19 @@ public class Couch implements Serializable {
 
 	public Couch() {
 		super();
+	}
+
+	public Couch(String passport, String firstName, String secondName, String phone, String email, String skype,
+			Club club, List<Athlete> athletes) {
+		super();
+		this.passport = passport;
+		this.firstName = firstName;
+		this.secondName = secondName;
+		this.phone = phone;
+		this.email = email;
+		this.skype = skype;
+		this.club = club;
+		this.athletes = athletes;
 	}
 
 	public String getFirstName() {
@@ -54,11 +67,11 @@ public class Couch implements Serializable {
 	}
 
 	public String geteMail() {
-		return eMail;
+		return email;
 	}
 
-	public void seteMail(String eMail) {
-		this.eMail = eMail;
+	public void seteMail(String email) {
+		this.email = email;
 	}
 
 	public String getSkype() {
@@ -96,7 +109,7 @@ public class Couch implements Serializable {
 	@Override
 	public String toString() {
 		return "Couch [passport=" + passport + ", firstName=" + firstName + ", secondName=" + secondName + ", phone="
-				+ phone + ", eMail=" + eMail + ", skype=" + skype + ", club=" + club + "]";
+				+ phone + ", email=" + email + ", skype=" + skype + ", club=" + club + "]";
 	}
 
 }

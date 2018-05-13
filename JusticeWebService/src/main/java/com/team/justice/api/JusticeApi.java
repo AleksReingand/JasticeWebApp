@@ -1,9 +1,19 @@
 package com.team.justice.api;
 
 public interface JusticeApi {
-	String ADD_NEW_COUCH = "/couch";
-	String ADD_NEW_ATHLETE = "athlete";
-	String ADD_NEW_CLUB = "club";
-	String ADD_NEW_ADDRESS = "address";
+	
+	//Base URL couch "/couch"
+	//POST
+	String ADD_NEW_COUCH = "/registration";
+	String ADD_NEW_ATHLETE = "/athlete";
+	//PUT
+	String UPDATE_ATHLETE = "/athlete";
+	//GET
+	String SHOW_ATHLETE = "/athlete";
+	String SHOW_ATHLETES = "/athletes";
+	String ATHLETE_TO_TOURNAMENT = "/tourn/athlete";
+	//DATA
+	String ATHLETE_NICK_NAME = "nick";
+	
 
 }

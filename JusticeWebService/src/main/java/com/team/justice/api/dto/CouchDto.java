@@ -1,5 +1,7 @@
 package com.team.justice.api.dto;
 
+import java.util.List;
+
 public class CouchDto {
 
 	public String passport;
@@ -8,12 +10,15 @@ public class CouchDto {
 	public String phone;
 	public String email;
 	public String skype;
+	public ClubDto club;
+	public List<String> athleteNickNames;
 
 	public CouchDto() {
 		super();
 	}
 
-	public CouchDto(String passport, String firstName, String secondName, String phone, String email, String skype) {
+	public CouchDto(String passport, String firstName, String secondName, String phone, String email, String skype,
+			ClubDto club, List<String> athleteNickNames) {
 		super();
 		this.passport = passport;
 		this.firstName = firstName;
@@ -21,6 +26,8 @@ public class CouchDto {
 		this.phone = phone;
 		this.email = email;
 		this.skype = skype;
+		this.club = club;
+		this.athleteNickNames = athleteNickNames;
 	}
 
 	public String getPassport() {
@@ -45,6 +52,14 @@ public class CouchDto {
 
 	public String getSkype() {
 		return skype;
+	}
+
+	public ClubDto getClub() {
+		return club;
+	}
+
+	public List<String> getAthleteNickNames() {
+		return athleteNickNames;
 	}
 
 }

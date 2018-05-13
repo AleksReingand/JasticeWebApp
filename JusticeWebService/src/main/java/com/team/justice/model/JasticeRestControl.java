@@ -1,38 +1,39 @@
 package com.team.justice.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.team.justice.interfaces.IJustice;
-import com.team.justice.api.*;
-import com.team.justice.api.dto.*;
+import com.team.justice.api.JusticeApi;
+import com.team.justice.api.dto.AthleteDto;
+import com.team.justice.api.dto.CouchDto;
 import com.team.justice.api.enums.ReturnCode;
+import com.team.justice.entities.Athlete;
+import com.team.justice.interfaces.IJusticeCouch;
 
 @RestController
+@RequestMapping("/couch")
 public class JasticeRestControl {
 	@Autowired
-	IJustice justice;
+	IJusticeCouch couches;
 
 	@PostMapping(JusticeApi.ADD_NEW_COUCH)
 	public ReturnCode addNewCouch(@RequestBody CouchDto couch) {
-		return justice.addNewCouch(couch);
+		return couches.addNewCouch(couch);
 	}
 
 	@PostMapping(JusticeApi.ADD_NEW_ATHLETE)
 	public ReturnCode addNewAthlete(@RequestBody AthleteDto athlete) {
-		return justice.addNewAthlete(athlete);
+		return couches.addNewAthlete(athlete);
 	}
 
-	@PostMapping(JusticeApi.ADD_NEW_CLUB)
-	public ReturnCode addNewClub(@RequestBody ClubDto club) {
-		return justice.addNewClub(club);
-	}
-
-	@PostMapping(JusticeApi.ADD_NEW_ADDRESS)
-	public ReturnCode addNewAddress(@RequestBody AddressDto address) {
-		return justice.addNewAddress(address);
+	@GetMapping(JusticeApi.SHOW_ATHLETE)
+	public Athlete athlete(@RequestParam(name = JusticeApi.ATHLETE_NICK_NAME) String nickName) {
+		return couches.showAthlete(nickName);
 	}
 
 }

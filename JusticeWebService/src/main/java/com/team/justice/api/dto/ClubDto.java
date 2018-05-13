@@ -1,26 +1,27 @@
 package com.team.justice.api.dto;
 
+import java.util.List;
+
 public class ClubDto {
 
-	public ClubIdDto club;
-	public String title;
+	public ClubIdDto id;
+	public List<String> couchePassports;
+	public List<String> athleteNickNames;
 
 	public ClubDto() {
 		super();
 	}
 
-	public ClubDto(ClubIdDto club, String title) {
-		super();
-		this.club = club;
-		this.title = title;
+	public ClubIdDto getId() {
+		return id;
 	}
 
-	public ClubIdDto getClub() {
-		return club;
+	public List<String> getCouchePassports() {
+		return couchePassports;
 	}
 
-	public String getTitle() {
-		return title;
+	public List<String> getAthleteNickNames() {
+		return athleteNickNames;
 	}
 
 }
