@@ -6,6 +6,7 @@ public interface JusticeApi {
 	//POST
 	String ADD_NEW_COUCH = "/registration";
 	String ADD_NEW_ATHLETE = "/athlete";
+	String ADD_NEW_ADDRESS = "/address";
 	//PUT
 	String UPDATE_ATHLETE = "/athlete";
 	//GET

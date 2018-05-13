@@ -1,5 +1,6 @@
 package com.team.justice.api.dto;
 
+import java.util.List;
 
 public class AddressDto {
 
@@ -10,13 +11,14 @@ public class AddressDto {
 	public String street;
 	public int buinding;
 	public String housing;
+	public String nameClubs;
 
 	public AddressDto() {
 		super();
 	}
 
-	public AddressDto(CoordinatesIdDto coordinates, String country, String city, String state, String street, int buinding,
-			String housing) {
+	public AddressDto(CoordinatesIdDto coordinates, String country, String city, String state, String street,
+			int buinding, String housing, String nameClubs) {
 		super();
 		this.coordinates = coordinates;
 		this.country = country;
@@ -25,6 +27,7 @@ public class AddressDto {
 		this.street = street;
 		this.buinding = buinding;
 		this.housing = housing;
+		this.nameClubs = nameClubs;
 	}
 
 	public CoordinatesIdDto getCoordinates() {
@@ -54,5 +57,10 @@ public class AddressDto {
 	public String getHousing() {
 		return housing;
 	}
+
+	public String getNameClubs() {
+		return nameClubs;
+	}
+	
 
 }

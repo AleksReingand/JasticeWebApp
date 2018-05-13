@@ -30,6 +30,18 @@ public class Address implements Serializable {
 		super();
 	}
 
+	public Address(CoordinatesId id, String country, String city, String state, String street, int building,
+			String housing) {
+		super();
+		this.id = id;
+		this.country = country;
+		this.city = city;
+		this.state = state;
+		this.street = street;
+		this.building = building;
+		this.housing = housing;
+	}
+
 	public String getCountry() {
 		return country;
 	}

@@ -30,6 +30,8 @@ public class JasticeRestControl {
 	public ReturnCode addNewAthlete(@RequestBody AthleteDto athlete) {
 		return couches.addNewAthlete(athlete);
 	}
+	
+	
 
 	@GetMapping(JusticeApi.SHOW_ATHLETE)
 	public Athlete athlete(@RequestParam(name = JusticeApi.ATHLETE_NICK_NAME) String nickName) {

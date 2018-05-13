@@ -15,6 +15,7 @@ public class Couch implements Serializable {
 	private static final long serialVersionUID = 954543821761538658L;
 	@Id
 	String passport;
+	String city;
 	String firstName;
 	String secondName;
 	String phone;
@@ -29,10 +30,11 @@ public class Couch implements Serializable {
 		super();
 	}
 
-	public Couch(String passport, String firstName, String secondName, String phone, String email, String skype,
-			Club club, List<Athlete> athletes) {
+	public Couch(String passport, String city, String firstName, String secondName, String phone, String email,
+			String skype, Club club, List<Athlete> athletes) {
 		super();
 		this.passport = passport;
+		this.city = city;
 		this.firstName = firstName;
 		this.secondName = secondName;
 		this.phone = phone;
@@ -106,10 +108,19 @@ public class Couch implements Serializable {
 		return passport;
 	}
 
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
 	@Override
 	public String toString() {
-		return "Couch [passport=" + passport + ", firstName=" + firstName + ", secondName=" + secondName + ", phone="
-				+ phone + ", email=" + email + ", skype=" + skype + ", club=" + club + "]";
+		return "Couch [passport=" + passport + ", city=" + city + ", firstName=" + firstName + ", secondName="
+				+ secondName + ", phone=" + phone + ", email=" + email + ", skype=" + skype + ", club=" + club
+				+ ", athletes=" + athletes + "]";
 	}
 
 }
