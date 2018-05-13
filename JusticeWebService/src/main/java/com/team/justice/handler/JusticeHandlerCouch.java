@@ -1,8 +1,7 @@
 package com.team.justice.handler;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -32,8 +31,8 @@ public class JusticeHandlerCouch implements IJusticeCouch, IJusticeCummon {
 		ClubId clubId = new ClubId(couch.clubName, couch.city);
 		Club club = em.find(Club.class, clubId);
 		if (club == null) {
-			// TODO (тут мы должны вызвать метод создания нового клуба, но в этот метод
-			// передается клубДТО)
+			// TODO (There is we can call function for create new club, but in parameter
+			// clubDto)
 		}
 		List<Athlete> athletes = Collections.emptyList();
 
@@ -51,10 +50,10 @@ public class JusticeHandlerCouch implements IJusticeCouch, IJusticeCummon {
 		}
 
 		Couch couch = em.find(Couch.class, athlete.firstNameCouch);
-		// TODO (ключ тренера - это паспорт, тогда в атлете мы должны хранить паспорт
-		// тренера, но зачем нам это. Как достучаться до тренера?)
+		// TODO (Key couch - it's passport. Inside athleteDto is nameCouch, how get
+		// couch)
 		Club club = em.find(Club.class, couch.getClub());
-		// TODO (если нет тренера, то тут налл и мы упали)
+		// TODO (If not couch, what doing?)
 
 		em.persist(new Athlete(athlete.nickName, athlete.passport, athlete.firstName, athlete.secondName,
 				athlete.birthday, athlete.phone, athlete.email, athlete.gender, athlete.weigth, couch, club));
@@ -72,7 +71,7 @@ public class JusticeHandlerCouch implements IJusticeCouch, IJusticeCummon {
 		List<Couch> couches = Collections.emptyList();
 		List<Athlete> athletes = Collections.emptyList();
 		ClubId id = new ClubId(club.id.title, club.id.nameCity);
-		// TODO (тут мы должны вызвать метод создания адреса)
+		// TODO (Here we need call function for create new Address)
 		Address address = new Address();
 
 		em.persist(new Club(id, address, couches, athletes));
@@ -86,7 +85,7 @@ public class JusticeHandlerCouch implements IJusticeCouch, IJusticeCummon {
 		if (couch == null) {
 			return ReturnCode.COUCH_NOT_FOUND;
 		}
-		// TODO (как нам узнать к какому полю сделать сеттер)
+		// TODO (What doing setter)
 
 		return ReturnCode.OK;
 	}
@@ -94,9 +93,9 @@ public class JusticeHandlerCouch implements IJusticeCouch, IJusticeCummon {
 	@Override
 	@Transactional
 	public ReturnCode deleteProfileCouch(String passport) {
-		// TODO (тут я подумал что у тренера может быть несколько клубов или строго
-		// делаем что у тренера только один клуб, при удалении тренера, что происходит с
-		// атлетами? Поле тренер становиться налл?)
+		// TODO (then I thought that the coach can have several clubs or strictly do
+		// that the coach has only one club, with the removal of the coach, what happens
+		// to the athletes? Does the field coach - null?)
 
 		Couch couch = em.find(Couch.class, passport);
 		if (couch == null) {
@@ -119,7 +118,7 @@ public class JusticeHandlerCouch implements IJusticeCouch, IJusticeCummon {
 			return ReturnCode.ATHLETE_NOT_FOUND;
 		}
 
-		// TODO (как нам узнать к какому полю сделать сеттер)
+		// TODO (what doing setter)
 
 		return ReturnCode.OK;
 	}
@@ -144,19 +143,20 @@ public class JusticeHandlerCouch implements IJusticeCouch, IJusticeCummon {
 	}
 
 	@Override
-	public Iterable<AthleteDto> showAthletes() {
-		// TODO Auto-generated method stub
-		return null;
+	public Iterable<AthleteDto> showAthletes(String pasport) {
+		// TODO
+		Couch couch = em.find(Couch.class, pasport);
+		return couch.getAthletes().stream().map(x -> athleteToAthleteDto(x)).collect(Collectors.toList());
 	}
 
 	@Override
-	public Athlete showAthlete(String nickName) {
+	public AthleteDto showAthlete(String nickName) {
 		Athlete athlete = em.find(Athlete.class, nickName);
-
-		return athlete;
+		AthleteDto athleteDto = athleteToAthleteDto(athlete);
+		return athleteDto;
 	}
 
-	private AthleteDto AthleteToAthleteDto(Athlete athlete) {
+	private AthleteDto athleteToAthleteDto(Athlete athlete) {
 		AthleteDto athleteDto = new AthleteDto(athlete.getNickName(), athlete.getPassport(), athlete.getFirstName(),
 				athlete.getSecondName(), athlete.getBirthday(), athlete.getPhone(), athlete.geteMail(),
 				athlete.isGender(), athlete.getWeigth(), athlete.getCouch().getFirstName(),

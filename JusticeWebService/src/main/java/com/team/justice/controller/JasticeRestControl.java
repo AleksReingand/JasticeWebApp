@@ -1,4 +1,4 @@
-package com.team.justice.model;
+package com.team.justice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +12,6 @@ import com.team.justice.api.JusticeApi;
 import com.team.justice.api.dto.AthleteDto;
 import com.team.justice.api.dto.CouchDto;
 import com.team.justice.api.enums.ReturnCode;
-import com.team.justice.entities.Athlete;
 import com.team.justice.interfaces.IJusticeCouch;
 
 @RestController
@@ -30,11 +29,9 @@ public class JasticeRestControl {
 	public ReturnCode addNewAthlete(@RequestBody AthleteDto athlete) {
 		return couches.addNewAthlete(athlete);
 	}
-	
-	
-
+		
 	@GetMapping(JusticeApi.SHOW_ATHLETE)
-	public Athlete athlete(@RequestParam(name = JusticeApi.ATHLETE_NICK_NAME) String nickName) {
+	public AthleteDto athlete(@RequestParam(name = JusticeApi.ATHLETE_NICK_NAME) String nickName) {
 		return couches.showAthlete(nickName);
 	}
 

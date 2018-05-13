@@ -20,9 +20,9 @@ public interface IJusticeCouch {
 	
 	ReturnCode deleteAthlete(String nickName);
 	
-	Iterable<AthleteDto> showAthletes();
+	Iterable<AthleteDto> showAthletes(String passport);
 	
-	Athlete showAthlete(String nickName);
+	AthleteDto showAthlete(String nickName);
 	
 	ReturnCode addAthleteToTourn(String nickName, TournamentDto tourn);
 
