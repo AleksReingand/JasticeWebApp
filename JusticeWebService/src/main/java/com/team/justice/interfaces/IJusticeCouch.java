@@ -2,21 +2,20 @@ package com.team.justice.interfaces;
 
 import com.team.justice.api.dto.*;
 import com.team.justice.api.enums.ReturnCode;
-import com.team.justice.entities.Athlete;
 
 public interface IJusticeCouch {
 
-	ReturnCode addNewCouch(CouchDto couch);
+	ReturnCode addNewCouch(CouchDto couchDto, ClubDto clubDto);
 	
-	ReturnCode updateProfileCouch(String passport);
+	ReturnCode updateProfileCouch(String passport, CouchDto couchDto);
 	
 	ReturnCode deleteProfileCouch(String passpart);
 	
-	ReturnCode addNewClub(ClubDto club);
+	ReturnCode addNewClub(ClubDto clubDto);
 
-	ReturnCode addNewAthlete(AthleteDto athlete);
+	ReturnCode addNewAthlete(AthleteDto athleteDto, ClubDto clubDto);
 	
-	ReturnCode updateProfileAthlete(String nickName);
+	ReturnCode updateProfileAthlete(String nickName, AthleteDto atleteDto);
 	
 	ReturnCode deleteAthlete(String nickName);
 	
@@ -25,5 +24,6 @@ public interface IJusticeCouch {
 	AthleteDto showAthlete(String nickName);
 	
 	ReturnCode addAthleteToTourn(String nickName, TournamentDto tourn);
+
 
 }

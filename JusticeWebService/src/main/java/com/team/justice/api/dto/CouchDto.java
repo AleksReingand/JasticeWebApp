@@ -2,6 +2,8 @@ package com.team.justice.api.dto;
 
 import java.util.List;
 
+import com.team.justice.api.enums.StatusCouch;
+
 public class CouchDto {
 
 	public String passport;
@@ -13,13 +15,14 @@ public class CouchDto {
 	public String skype;
 	public String clubName;
 	public List<String> athleteNickNames;
+	public StatusCouch statusCouch;
 
 	public CouchDto() {
 		super();
 	}
 
 	public CouchDto(String passport, String city, String firstName, String secondName, String phone, String email,
-			String skype, String clubName, List<String> athleteNickNames) {
+			String skype, String clubName, List<String> athleteNickNames, StatusCouch statusCouch) {
 		super();
 		this.passport = passport;
 		this.city = city;
@@ -30,6 +33,7 @@ public class CouchDto {
 		this.skype = skype;
 		this.clubName = clubName;
 		this.athleteNickNames = athleteNickNames;
+		this.statusCouch = statusCouch;
 	}
 
 	public String getPassport() {
@@ -68,4 +72,9 @@ public class CouchDto {
 		return athleteNickNames;
 	}
 
+	public StatusCouch getStatusCouch() {
+		return statusCouch;
+	}
+
+	
 }

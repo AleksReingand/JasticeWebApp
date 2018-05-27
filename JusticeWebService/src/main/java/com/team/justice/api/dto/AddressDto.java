@@ -4,34 +4,40 @@ import java.util.List;
 
 public class AddressDto {
 
-	public CoordinatesIdDto coordinates;
+	public double lat;
+	public double lon;
 	public String country;
 	public String city;
 	public String state;
 	public String street;
 	public int buinding;
 	public String housing;
-	public String nameClubs;
+	public List<String> titleClubs;
 
 	public AddressDto() {
 		super();
 	}
 
-	public AddressDto(CoordinatesIdDto coordinates, String country, String city, String state, String street,
-			int buinding, String housing, String nameClubs) {
+	public AddressDto(double lat, double lon, String country, String city, String state, String street, int buinding,
+			String housing, List<String> titleClubs) {
 		super();
-		this.coordinates = coordinates;
+		this.lat = lat;
+		this.lon = lon;
 		this.country = country;
 		this.city = city;
 		this.state = state;
 		this.street = street;
 		this.buinding = buinding;
 		this.housing = housing;
-		this.nameClubs = nameClubs;
+		this.titleClubs = titleClubs;
 	}
 
-	public CoordinatesIdDto getCoordinates() {
-		return coordinates;
+	public double getLat() {
+		return lat;
+	}
+
+	public double getLon() {
+		return lon;
 	}
 
 	public String getCountry() {
@@ -58,9 +64,10 @@ public class AddressDto {
 		return housing;
 	}
 
-	public String getNameClubs() {
-		return nameClubs;
+	public List<String> getTitleClubs() {
+		return titleClubs;
 	}
+
 	
 
 }

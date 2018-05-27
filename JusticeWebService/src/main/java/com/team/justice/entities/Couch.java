@@ -5,6 +5,8 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import com.team.justice.api.enums.StatusCouch;
+
 @Entity
 @Table(name = "couches")
 public class Couch implements Serializable {
@@ -21,17 +23,19 @@ public class Couch implements Serializable {
 	String phone;
 	String email;
 	String skype;
-	@ManyToOne
-	Club club;
+	@ManyToMany
+	List<Club> clubs;
 	@OneToMany(mappedBy = "couch")
 	List<Athlete> athletes;
+	@Enumerated(EnumType.STRING)
+	StatusCouch statusCouch;
 
 	public Couch() {
 		super();
 	}
 
 	public Couch(String passport, String city, String firstName, String secondName, String phone, String email,
-			String skype, Club club, List<Athlete> athletes) {
+			String skype, List<Club> clubs, List<Athlete> athletes, StatusCouch statusCouch) {
 		super();
 		this.passport = passport;
 		this.city = city;
@@ -40,8 +44,17 @@ public class Couch implements Serializable {
 		this.phone = phone;
 		this.email = email;
 		this.skype = skype;
-		this.club = club;
+		this.clubs = clubs;
 		this.athletes = athletes;
+		this.statusCouch = statusCouch;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	public String getFirstName() {
@@ -68,11 +81,11 @@ public class Couch implements Serializable {
 		this.phone = phone;
 	}
 
-	public String geteMail() {
+	public String getEmail() {
 		return email;
 	}
 
-	public void seteMail(String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
@@ -84,12 +97,12 @@ public class Couch implements Serializable {
 		this.skype = skype;
 	}
 
-	public Club getClub() {
-		return club;
+	public List<Club> getClubs() {
+		return clubs;
 	}
 
-	public void setClub(Club club) {
-		this.club = club;
+	public void setClubs(List<Club> clubs) {
+		this.clubs = clubs;
 	}
 
 	public List<Athlete> getAthletes() {
@@ -100,6 +113,14 @@ public class Couch implements Serializable {
 		this.athletes = athletes;
 	}
 
+	public StatusCouch getStatusCouch() {
+		return statusCouch;
+	}
+
+	public void setStatusCouch(StatusCouch statusCouch) {
+		this.statusCouch = statusCouch;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -108,19 +129,29 @@ public class Couch implements Serializable {
 		return passport;
 	}
 
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((passport == null) ? 0 : passport.hashCode());
+		return result;
 	}
 
 	@Override
-	public String toString() {
-		return "Couch [passport=" + passport + ", city=" + city + ", firstName=" + firstName + ", secondName="
-				+ secondName + ", phone=" + phone + ", email=" + email + ", skype=" + skype + ", club=" + club
-				+ ", athletes=" + athletes + "]";
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Couch other = (Couch) obj;
+		if (passport == null) {
+			if (other.passport != null)
+				return false;
+		} else if (!passport.equals(other.passport))
+			return false;
+		return true;
 	}
 
 }

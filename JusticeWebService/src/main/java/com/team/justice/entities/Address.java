@@ -31,7 +31,7 @@ public class Address implements Serializable {
 	}
 
 	public Address(CoordinatesId id, String country, String city, String state, String street, int building,
-			String housing) {
+			String housing, List<Club> clubs) {
 		super();
 		this.id = id;
 		this.country = country;
@@ -40,6 +40,7 @@ public class Address implements Serializable {
 		this.street = street;
 		this.building = building;
 		this.housing = housing;
+		this.clubs = clubs;
 	}
 
 	public String getCountry() {

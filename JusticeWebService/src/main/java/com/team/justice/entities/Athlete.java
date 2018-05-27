@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import com.team.justice.api.enums.StatusAthlete;
+
 @Entity
 @Table(name = "athletes")
 public class Athlete implements Serializable {
@@ -22,6 +24,8 @@ public class Athlete implements Serializable {
 	String email;
 	boolean gender;
 	double weigth;
+	@Enumerated(EnumType.STRING)
+	StatusAthlete statusAthlete;
 	@ManyToOne
 	Couch couch;
 	@ManyToOne
@@ -32,7 +36,7 @@ public class Athlete implements Serializable {
 	}
 
 	public Athlete(String nickName, String passport, String firstName, String secondName, String birthday, String phone,
-			String email, boolean gender, double weigth, Couch couch, Club club) {
+			String email, boolean gender, double weigth, StatusAthlete statusAthlete, Couch couch, Club club) {
 		super();
 		this.nickName = nickName;
 		this.passport = passport;
@@ -43,6 +47,7 @@ public class Athlete implements Serializable {
 		this.email = email;
 		this.gender = gender;
 		this.weigth = weigth;
+		this.statusAthlete = statusAthlete;
 		this.couch = couch;
 		this.club = club;
 	}
@@ -71,18 +76,6 @@ public class Athlete implements Serializable {
 		this.secondName = secondName;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getBirthday() {
-		return birthday;
-	}
-
 	public String getPhone() {
 		return phone;
 	}
@@ -91,11 +84,11 @@ public class Athlete implements Serializable {
 		this.phone = phone;
 	}
 
-	public String geteMail() {
+	public String getEmail() {
 		return email;
 	}
 
-	public void seteMail(String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
@@ -105,6 +98,14 @@ public class Athlete implements Serializable {
 
 	public void setWeigth(double weigth) {
 		this.weigth = weigth;
+	}
+
+	public StatusAthlete getStatusAthlete() {
+		return statusAthlete;
+	}
+
+	public void setStatusAthlete(StatusAthlete statusAthlete) {
+		this.statusAthlete = statusAthlete;
 	}
 
 	public Couch getCouch() {
@@ -131,15 +132,37 @@ public class Athlete implements Serializable {
 		return nickName;
 	}
 
+	public String getBirthday() {
+		return birthday;
+	}
+
 	public boolean isGender() {
 		return gender;
 	}
 
 	@Override
-	public String toString() {
-		return "Athlete [nickName=" + nickName + ", passport=" + passport + ", firstName=" + firstName + ", secondName="
-				+ secondName + ", birthday=" + birthday + ", phone=" + phone + ", email=" + email + ", gender=" + gender
-				+ ", weigth=" + weigth + ", couch=" + couch + ", club=" + club + "]";
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((nickName == null) ? 0 : nickName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Athlete other = (Athlete) obj;
+		if (nickName == null) {
+			if (other.nickName != null)
+				return false;
+		} else if (!nickName.equals(other.nickName))
+			return false;
+		return true;
 	}
 
 }
