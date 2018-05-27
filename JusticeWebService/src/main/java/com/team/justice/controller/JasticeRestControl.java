@@ -15,12 +15,15 @@ import com.team.justice.api.dto.AthleteDto;
 import com.team.justice.api.dto.*;
 import com.team.justice.api.enums.ReturnCode;
 import com.team.justice.interfaces.IJusticeCouch;
+import com.team.justice.interfaces.IJusticeCummon;
 
 @RestController
 @RequestMapping("/couch")
 public class JasticeRestControl {
 	@Autowired
 	IJusticeCouch couches;
+	@Autowired
+	IJusticeCummon common;
 
 	@PostMapping(JusticeApi.ADD_NEW_COUCH)
 	public ReturnCode addNewCouch(@RequestBody CouchDto couchDto, ClubDto clubDto) {
@@ -31,6 +34,11 @@ public class JasticeRestControl {
 	public ReturnCode addNewAthlete(@RequestBody AthleteDto athleteDto, ClubDto clubDto, Principal principal) {
 		String name = principal.getName();
 		return couches.addNewAthlete(athleteDto, clubDto);
+	}
+	
+	@PostMapping(JusticeApi.ADD_NEW_ADDRESS)
+	public ReturnCode addNewAddress(@RequestBody AddressDto addressDto) {
+		return common.addNewAddress(addressDto);
 	}
 		
 	@GetMapping(JusticeApi.SHOW_ATHLETE)

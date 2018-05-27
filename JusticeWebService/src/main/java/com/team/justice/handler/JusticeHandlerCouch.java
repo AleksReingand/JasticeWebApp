@@ -256,21 +256,21 @@ public class JusticeHandlerCouch implements IJusticeCouch, IJusticeCummon {
 
 	@Override
 	@Transactional
-	public ReturnCode addAthleteToTourn(String nickName, TournamentDto tourn) {
+	public ReturnCode addAthleteToTourn(String nickName, TournamentDto tournDto) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	@Transactional
-	public ReturnCode addNewAddress(AddressDto address) {
-		CoordinatesId coordinatesId = new CoordinatesId(address.lon, address.lat);
+	public ReturnCode addNewAddress(AddressDto addressDto) {
+		CoordinatesId coordinatesId = new CoordinatesId(addressDto.lon, addressDto.lat);
 		if (em.find(Address.class, coordinatesId) != null) {
 			return ReturnCode.ADDRESS_EXISTS;
 		}
 		List<Club> clubs = Collections.emptyList();
-		em.persist(new Address(coordinatesId, address.country, address.city, address.state, address.street,
-				address.buinding, address.housing, clubs));
+		em.persist(new Address(coordinatesId, addressDto.country, addressDto.city, addressDto.state, addressDto.street,
+				addressDto.building, addressDto.housing, clubs));
 		return ReturnCode.OK;
 	}
 

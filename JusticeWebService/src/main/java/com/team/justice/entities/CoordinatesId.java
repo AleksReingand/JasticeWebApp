@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+
 @Embeddable
 public class CoordinatesId implements Serializable {
 

@@ -3,6 +3,7 @@ package com.team.justice.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "addreses")
@@ -15,11 +16,14 @@ public class Address implements Serializable {
 
 	@EmbeddedId
 	private CoordinatesId id;
-
+	@NotNull
 	String country;
+	@NotNull
 	String city;
 	String state;
+	@NotNull
 	String street;
+	@NotNull
 	int building;
 	String housing;
 
