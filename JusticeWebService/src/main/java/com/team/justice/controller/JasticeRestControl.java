@@ -18,22 +18,22 @@ import com.team.justice.interfaces.IJusticeCouch;
 import com.team.justice.interfaces.IJusticeCummon;
 
 @RestController
-@RequestMapping("/couch")
+@RequestMapping("/coach")
 public class JasticeRestControl {
 	@Autowired
 	IJusticeCouch couches;
 	@Autowired
 	IJusticeCummon common;
 
-	@PostMapping(JusticeApi.ADD_NEW_COUCH)
-	public ReturnCode addNewCouch(@RequestBody CouchDto couchDto, ClubDto clubDto) {
-		return couches.addNewCouch(couchDto, clubDto);
+	@PostMapping(JusticeApi.ADD_NEW_COACH)
+	public ReturnCode addNewCoach(@RequestBody CoachDto coachDto) {
+		return couches.addNewCoach(coachDto);
 	}
 
 	@PostMapping(JusticeApi.ADD_NEW_ATHLETE)
-	public ReturnCode addNewAthlete(@RequestBody AthleteDto athleteDto, ClubDto clubDto, Principal principal) {
+	public ReturnCode addNewAthlete(@RequestBody AthleteDto athleteDto, Principal principal) {
 		String name = principal.getName();
-		return couches.addNewAthlete(athleteDto, clubDto);
+		return couches.addNewAthlete(athleteDto);
 	}
 	
 	@PostMapping(JusticeApi.ADD_NEW_ADDRESS)

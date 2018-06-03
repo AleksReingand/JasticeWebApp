@@ -2,9 +2,9 @@ package com.team.justice.api;
 
 public interface JusticeApi {
 	
-	//Base URL couch "/couch"
+	//Base URL coach "/coach"
 	//POST
-	String ADD_NEW_COUCH = "/registration";
+	String ADD_NEW_COACH = "/registration";
 	String ADD_NEW_ATHLETE = "/athlete";
 	String ADD_NEW_ADDRESS = "/address";
 	//PUT

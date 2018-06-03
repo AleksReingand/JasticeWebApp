@@ -5,17 +5,17 @@ import com.team.justice.api.enums.ReturnCode;
 
 public interface IJusticeCouch {
 
-	ReturnCode addNewCouch(CouchDto couchDto, ClubDto clubDto);
+	ReturnCode addNewCoach(CoachDto coachDto);
 	
-	ReturnCode updateProfileCouch(String passport, CouchDto couchDto);
+	ReturnCode updateProfileCoach(CoachDto coachDto);
 	
-	ReturnCode deleteProfileCouch(String passpart);
+	ReturnCode deleteProfileCoach(String passport);
 	
 	ReturnCode addNewClub(ClubDto clubDto);
 
-	ReturnCode addNewAthlete(AthleteDto athleteDto, ClubDto clubDto);
+	ReturnCode addNewAthlete(AthleteDto athleteDto);
 	
-	ReturnCode updateProfileAthlete(String nickName, AthleteDto atleteDto);
+	ReturnCode updateProfileAthlete(AthleteDto atleteDto);
 	
 	ReturnCode deleteAthlete(String nickName);
 	

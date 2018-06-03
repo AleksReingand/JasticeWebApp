@@ -27,7 +27,7 @@ public class Athlete implements Serializable {
 	@Enumerated(EnumType.STRING)
 	StatusAthlete statusAthlete;
 	@ManyToOne
-	Couch couch;
+	Coach coach;
 	@ManyToOne
 	Club club;
 
@@ -36,7 +36,7 @@ public class Athlete implements Serializable {
 	}
 
 	public Athlete(String nickName, String passport, String firstName, String secondName, String birthday, String phone,
-			String email, boolean gender, double weigth, StatusAthlete statusAthlete, Couch couch, Club club) {
+			String email, boolean gender, double weigth, StatusAthlete statusAthlete, Coach coach, Club club) {
 		super();
 		this.nickName = nickName;
 		this.passport = passport;
@@ -48,7 +48,7 @@ public class Athlete implements Serializable {
 		this.gender = gender;
 		this.weigth = weigth;
 		this.statusAthlete = statusAthlete;
-		this.couch = couch;
+		this.coach = coach;
 		this.club = club;
 	}
 
@@ -108,12 +108,12 @@ public class Athlete implements Serializable {
 		this.statusAthlete = statusAthlete;
 	}
 
-	public Couch getCouch() {
-		return couch;
+	public Coach getCoach() {
+		return coach;
 	}
 
-	public void setCouch(Couch couch) {
-		this.couch = couch;
+	public void setCoach(Coach coach) {
+		this.coach = coach;
 	}
 
 	public Club getClub() {

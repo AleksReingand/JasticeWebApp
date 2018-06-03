@@ -2,9 +2,9 @@ package com.team.justice.api.dto;
 
 import java.util.List;
 
-import com.team.justice.api.enums.StatusCouch;
+import com.team.justice.api.enums.StatusCoach;
 
-public class CouchDto {
+public class CoachDto {
 
 	public String passport;
 	public String city;
@@ -15,14 +15,14 @@ public class CouchDto {
 	public String skype;
 	public String clubName;
 	public List<String> athleteNickNames;
-	public StatusCouch statusCouch;
+	public StatusCoach statusCouch;
 
-	public CouchDto() {
+	public CoachDto() {
 		super();
 	}
 
-	public CouchDto(String passport, String city, String firstName, String secondName, String phone, String email,
-			String skype, String clubName, List<String> athleteNickNames, StatusCouch statusCouch) {
+	public CoachDto(String passport, String city, String firstName, String secondName, String phone, String email,
+			String skype, String clubName, List<String> athleteNickNames, StatusCoach statusCouch) {
 		super();
 		this.passport = passport;
 		this.city = city;
@@ -72,7 +72,7 @@ public class CouchDto {
 		return athleteNickNames;
 	}
 
-	public StatusCouch getStatusCouch() {
+	public StatusCoach getStatusCouch() {
 		return statusCouch;
 	}
 

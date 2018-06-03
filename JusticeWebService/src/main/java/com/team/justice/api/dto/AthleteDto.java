@@ -14,8 +14,9 @@ public class AthleteDto {
 	public boolean gender;
 	public double weigth;
 	public StatusAthlete statusAthlete;
-	public String passportCouch;
+	public String passportCoach;
 	public String clubName;
+	public String city;
 
 	public AthleteDto() {
 		super();
@@ -23,7 +24,7 @@ public class AthleteDto {
 
 	public AthleteDto(String nickName, String passport, String firstName, String secondName, String birthday,
 			String phone, String email, boolean gender, double weigth, StatusAthlete statusAthlete,
-			String passportCouch, String clubName) {
+			String passportCoach, String clubName, String city) {
 		super();
 		this.nickName = nickName;
 		this.passport = passport;
@@ -34,9 +35,10 @@ public class AthleteDto {
 		this.email = email;
 		this.gender = gender;
 		this.weigth = weigth;
-		this.passportCouch = passportCouch;
+		this.passportCoach = passportCoach;
 		this.clubName = clubName;
 		this.statusAthlete = statusAthlete;
+		this.city = city;
 	}
 
 	public String getNickName() {
@@ -75,8 +77,8 @@ public class AthleteDto {
 		return weigth;
 	}
 
-	public String getPassportCouch() {
-		return passportCouch;
+	public String getPassportCoach() {
+		return passportCoach;
 	}
 
 	public String getClubName() {
@@ -85,6 +87,10 @@ public class AthleteDto {
 
 	public StatusAthlete getStatusAthlete() {
 		return statusAthlete;
+	}
+
+	public String getCity() {
+		return city;
 	}
 
 }

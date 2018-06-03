@@ -5,11 +5,11 @@ import java.util.*;
 
 import javax.persistence.*;
 
-import com.team.justice.api.enums.StatusCouch;
+import com.team.justice.api.enums.StatusCoach;
 
 @Entity
-@Table(name = "couches")
-public class Couch implements Serializable {
+@Table(name = "coaches")
+public class Coach implements Serializable {
 
 	/**
 	 * 
@@ -25,17 +25,17 @@ public class Couch implements Serializable {
 	String skype;
 	@ManyToMany
 	List<Club> clubs;
-	@OneToMany(mappedBy = "couch")
+	@OneToMany
 	List<Athlete> athletes;
 	@Enumerated(EnumType.STRING)
-	StatusCouch statusCouch;
+	StatusCoach statusCoach;
 
-	public Couch() {
+	public Coach() {
 		super();
 	}
 
-	public Couch(String passport, String city, String firstName, String secondName, String phone, String email,
-			String skype, List<Club> clubs, List<Athlete> athletes, StatusCouch statusCouch) {
+	public Coach(String passport, String city, String firstName, String secondName, String phone, String email,
+			String skype, List<Club> clubs, List<Athlete> athletes, StatusCoach statusCoach) {
 		super();
 		this.passport = passport;
 		this.city = city;
@@ -46,7 +46,7 @@ public class Couch implements Serializable {
 		this.skype = skype;
 		this.clubs = clubs;
 		this.athletes = athletes;
-		this.statusCouch = statusCouch;
+		this.statusCoach = statusCoach;
 	}
 
 	public String getCity() {
@@ -113,12 +113,12 @@ public class Couch implements Serializable {
 		this.athletes = athletes;
 	}
 
-	public StatusCouch getStatusCouch() {
-		return statusCouch;
+	public StatusCoach getStatusCoach() {
+		return statusCoach;
 	}
 
-	public void setStatusCouch(StatusCouch statusCouch) {
-		this.statusCouch = statusCouch;
+	public void setStatusCoach(StatusCoach statusCoach) {
+		this.statusCoach = statusCoach;
 	}
 
 	public static long getSerialversionuid() {
@@ -145,7 +145,7 @@ public class Couch implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Couch other = (Couch) obj;
+		Coach other = (Coach) obj;
 		if (passport == null) {
 			if (other.passport != null)
 				return false;

@@ -13,52 +13,54 @@ import org.springframework.transaction.annotation.Transactional;
 import com.team.justice.api.dto.*;
 import com.team.justice.api.enums.*;
 import com.team.justice.entities.*;
-import com.team.justice.interfaces.IJusticeCouch;
-import com.team.justice.interfaces.IJusticeCummon;
+import com.team.justice.interfaces.*;
 
 @Repository
-public class JusticeHandlerCouch implements IJusticeCouch, IJusticeCummon {
+public class JusticeHandlerCoach implements IJusticeCouch, IJusticeCummon {
 	@PersistenceContext
 	EntityManager em;
 
 	@Override
 	@Transactional
-	public ReturnCode addNewCouch(CouchDto couchDto, ClubDto clubDto) {
-		if (em.find(Couch.class, couchDto.passport) != null) {
-			return ReturnCode.COUCH_EXISTS;
+	public ReturnCode addNewCoach(CoachDto coachDto) {
+		if (em.find(Coach.class, coachDto.passport) != null) {
+			return ReturnCode.COACH_EXISTS;
 		}
 
-		ClubId clubId = new ClubId(clubDto.title, clubDto.nameCity);
+		ClubId clubId = new ClubId(coachDto.clubName, coachDto.city);
 		Club club = em.find(Club.class, clubId);
 		if (club == null) {
-			addNewClub(clubDto);
+			return ReturnCode.CLUB_NOT_FOUND;
 		}
 		List<Athlete> athletes = Collections.emptyList();
 		List<Club> clubs = Collections.emptyList();
 		// TODO check list clubs
 		clubs.add(club);
-		em.persist(new Couch(couchDto.passport, couchDto.city, couchDto.firstName, couchDto.secondName, couchDto.phone,
-				couchDto.email, couchDto.skype, clubs, athletes, StatusCouch.ACTIVE));
+		em.persist(new Coach(coachDto.passport, coachDto.city, coachDto.firstName, coachDto.secondName, coachDto.phone,
+				coachDto.email, coachDto.skype, clubs, athletes, StatusCoach.ACTIVE));
 		return ReturnCode.OK;
 	}
 
 	@Override
 	@Transactional
-	public ReturnCode addNewAthlete(AthleteDto athleteDto, ClubDto clubDto) {
+	public ReturnCode addNewAthlete(AthleteDto athleteDto) {
 		if (em.find(Athlete.class, athleteDto.nickName) != null) {
 			return ReturnCode.ATHLETE_EXISTS;
 		}
-		// search couch of ID
-		Couch couch = em.find(Couch.class, athleteDto.passportCouch);
 		// search club of ID
-		ClubId clubId = new ClubId(clubDto.title, clubDto.nameCity);
+		ClubId clubId = new ClubId(athleteDto.clubName, athleteDto.city);
 		Club club = em.find(Club.class, clubId);
+		if (club == null) {
+			return ReturnCode.CLUB_NOT_FOUND;
+		}
+		// search coach of ID
+		Coach coach = em.find(Coach.class, athleteDto.passportCoach);
 		// get list athletes from club
 		List<Athlete> athletes = club.getAthletes();
 		// create new athlete
 		Athlete athlete = new Athlete(athleteDto.nickName, athleteDto.passport, athleteDto.firstName,
 				athleteDto.secondName, athleteDto.birthday, athleteDto.phone, athleteDto.email, athleteDto.gender,
-				athleteDto.weigth, StatusAthlete.ACTIVE, couch, club);
+				athleteDto.weigth, StatusAthlete.ACTIVE, coach, club);
 		// athlete to add in list
 		athletes.add(athlete);
 		// change list club's
@@ -84,10 +86,10 @@ public class JusticeHandlerCouch implements IJusticeCouch, IJusticeCummon {
 			addNewAddress(addressDto);
 		}
 		// Create new Club
-		List<Couch> couches = Collections.emptyList();
+		List<Coach> coaches = Collections.emptyList();
 		List<Athlete> athletes = Collections.emptyList();
 		ClubId id = new ClubId(clubDto.title, clubDto.nameCity);
-		Club club = new Club(id, address, couches, athletes);
+		Club club = new Club(id, address, coaches, athletes);
 		// Get list clubs from address and to add new Club in the list
 		List<Club> clubs = address.getClubs();
 		clubs.add(club);
@@ -99,83 +101,78 @@ public class JusticeHandlerCouch implements IJusticeCouch, IJusticeCummon {
 
 	@Override
 	@Transactional
-	public ReturnCode updateProfileCouch(String passport, CouchDto couchDto) {
-		Couch couch = em.find(Couch.class, passport);
-		if (couch == null) {
-			return ReturnCode.COUCH_NOT_FOUND;
+	public ReturnCode updateProfileCoach(CoachDto coachDto) {
+		Coach coach = em.find(Coach.class, coachDto.passport);
+		if (coach == null) {
+			return ReturnCode.COACH_NOT_FOUND;
 		}
-		updateAndAddProfileCouch(couch, couchDto);
 
-		return ReturnCode.OK;
+		return updateAndAddProfileCoach(coach, coachDto);
+
 	}
 
-	private void updateAndAddProfileCouch(Couch couch, CouchDto couchDto) {
-		String city = couch.getCity();
-		String firstName = couch.getFirstName();
-		String secondName = couch.getSecondName();
-		String phone = couch.getPhone();
-		String email = couch.getEmail();
-		String skype = couch.getSkype();
-		List<Club> clubs = couch.getClubs();
+	private ReturnCode updateAndAddProfileCoach(Coach coach, CoachDto coachDto) {
+		String city = coach.getCity();
+		String firstName = coach.getFirstName();
+		String secondName = coach.getSecondName();
+		String phone = coach.getPhone();
+		String email = coach.getEmail();
+		String skype = coach.getSkype();
+		List<Club> clubs = coach.getClubs();
 		// Check fields of update
-		if (!(couchDto.city.equals(city))) {
-			couch.setCity(city);
+		if (!(coachDto.city.equals(city))) {
+			coach.setCity(city);
 		}
-		if (!(couchDto.firstName.equals(firstName))) {
-			couch.setFirstName(couchDto.firstName);
+		if (!(coachDto.firstName.equals(firstName))) {
+			coach.setFirstName(coachDto.firstName);
 		}
-		if (!(couchDto.secondName.equals(secondName))) {
-			couch.setSecondName(couchDto.secondName);
+		if (!(coachDto.secondName.equals(secondName))) {
+			coach.setSecondName(coachDto.secondName);
 		}
-		if (!(couchDto.phone.equals(phone))) {
-			couch.setPhone(couchDto.phone);
+		if (!(coachDto.phone.equals(phone))) {
+			coach.setPhone(coachDto.phone);
 		}
-		if (!(couchDto.email.equals(email))) {
-			couch.setEmail(couchDto.email);
+		if (!(coachDto.email.equals(email))) {
+			coach.setEmail(coachDto.email);
 		}
-		if (!(couchDto.skype.equals(skype))) {
-			couch.setSkype(couchDto.skype);
+		if (!(coachDto.skype.equals(skype))) {
+			coach.setSkype(coachDto.skype);
 		}
 
-		ClubId clubId = new ClubId(couchDto.clubName, couchDto.city);
+		ClubId clubId = new ClubId(coachDto.clubName, coachDto.city);
 		Club clubNew = em.find(Club.class, clubId);
 		if (clubNew == null) {
-			// TODO Address
-			AddressDto address = new AddressDto();
-			List<String> couchePassports = Collections.emptyList();
-			List<String> athleteNickNames = Collections.emptyList();
-			couchePassports.add(couch.getPassport());
-			ClubDto clubDto = new ClubDto(clubId.getTitle(), clubId.getNameCity(), address, couchePassports,
-					athleteNickNames);
-			// TODO new Club
-			addNewClub(clubDto);
-		} else {
-
+			return ReturnCode.CLUB_NOT_FOUND;
 		}
-
-	}
-
-	@Override
-	@Transactional
-	public ReturnCode deleteProfileCouch(String passport) {
-		Couch couch = em.find(Couch.class, passport);
-		if (couch == null) {
-			return ReturnCode.COUCH_NOT_FOUND;
-		}
-		List<Club> clubs = couch.getClubs();
-		// TODO check delete couch from list club's
-		for (Club club : clubs) {
-			club.getCouches().remove(couch);
-		}
-		couch.setStatusCouch(StatusCouch.ARCHIVE);
-		//TODO to discuss what to do with list athletes 
 		return ReturnCode.OK;
 	}
 
 	@Override
 	@Transactional
-	public ReturnCode updateProfileAthlete(String nickName, AthleteDto athleteDto) {
-		Athlete athlete = em.find(Athlete.class, nickName);
+	public ReturnCode deleteProfileCoach(String passport) {
+		Coach coach = em.find(Coach.class, passport);
+		if (coach == null) {
+			return ReturnCode.COACH_NOT_FOUND;
+		}
+		List<Club> clubs = coach.getClubs();
+		// TODO check delete coach from list club's
+		for (Club club : clubs) {
+			club.getCoaches().remove(coach);
+		}
+		List<Athlete> athletes = coach.getAthletes();
+		for (Athlete athlete : athletes) {
+			// TODO maybe better change field Coach of status NOT_COACH.
+			athlete.setCoach(null);
+		}
+		coach.setStatusCoach(StatusCoach.ARCHIVE);
+
+		return ReturnCode.OK;
+	}
+
+	@Override
+	@Transactional
+	public ReturnCode updateProfileAthlete(AthleteDto athleteDto) {
+		Athlete athlete = em.find(Athlete.class, athleteDto.nickName);
 		if (athlete == null) {
 			return ReturnCode.ATHLETE_NOT_FOUND;
 		}
@@ -185,7 +182,7 @@ public class JusticeHandlerCouch implements IJusticeCouch, IJusticeCummon {
 		String phone = athlete.getPhone();
 		String email = athlete.getEmail();
 		double weigth = athlete.getWeigth();
-		Couch couch = athlete.getCouch();
+		Coach coach = athlete.getCoach();
 		// Check fields of update
 		if (!(athleteDto.passport.equals(passport))) {
 			athlete.setPassport(athleteDto.passport);
@@ -205,12 +202,12 @@ public class JusticeHandlerCouch implements IJusticeCouch, IJusticeCummon {
 		if (athleteDto.weigth != weigth) {
 			athlete.setWeigth(athleteDto.weigth);
 		}
-		Couch newCouch = em.find(Couch.class, athleteDto.passportCouch);
-		if (newCouch == null) {
-			return ReturnCode.COUCH_NOT_FOUND;
+		Coach newCoach = em.find(Coach.class, athleteDto.passportCoach);
+		if (newCoach == null) {
+			return ReturnCode.COACH_NOT_FOUND;
 		}
-		if (!(newCouch.equals(couch))) {
-			athlete.setCouch(newCouch);
+		if (!(newCoach.equals(coach))) {
+			athlete.setCoach(newCoach);
 		}
 		return ReturnCode.OK;
 	}
@@ -223,8 +220,8 @@ public class JusticeHandlerCouch implements IJusticeCouch, IJusticeCummon {
 		if (athlete == null) {
 			return ReturnCode.ATHLETE_NOT_FOUND;
 		}
-		Couch couch = em.find(Couch.class, athlete.getCouch());
-		List<Athlete> athletesCouch = couch.getAthletes();
+		Coach coach = em.find(Coach.class, athlete.getCoach());
+		List<Athlete> athletesCouch = coach.getAthletes();
 		athletesCouch.remove(athlete);
 		Club club = em.find(Club.class, athlete.getClub());
 		List<Athlete> athletesClub = club.getAthletes();
@@ -235,8 +232,8 @@ public class JusticeHandlerCouch implements IJusticeCouch, IJusticeCummon {
 
 	@Override
 	public Iterable<AthleteDto> showAthletes(String pasport) {
-		Couch couch = em.find(Couch.class, pasport);
-		return couch.getAthletes().stream().map(x -> athleteToAthleteDto(x)).collect(Collectors.toList());
+		Coach coach = em.find(Coach.class, pasport);
+		return coach.getAthletes().stream().map(x -> athleteToAthleteDto(x)).collect(Collectors.toList());
 	}
 
 	@Override
@@ -249,8 +246,8 @@ public class JusticeHandlerCouch implements IJusticeCouch, IJusticeCummon {
 	private AthleteDto athleteToAthleteDto(Athlete athlete) {
 		AthleteDto athleteDto = new AthleteDto(athlete.getNickName(), athlete.getPassport(), athlete.getFirstName(),
 				athlete.getSecondName(), athlete.getBirthday(), athlete.getPhone(), athlete.getEmail(),
-				athlete.isGender(), athlete.getWeigth(), athlete.getStatusAthlete(), athlete.getCouch().getPassport(),
-				athlete.getClub().getId().getTitle());
+				athlete.isGender(), athlete.getWeigth(), athlete.getStatusAthlete(), athlete.getCoach().getPassport(),
+				athlete.getClub().getId().getTitle(), athlete.getClub().getAddress().getCity());
 		return athleteDto;
 	}
 

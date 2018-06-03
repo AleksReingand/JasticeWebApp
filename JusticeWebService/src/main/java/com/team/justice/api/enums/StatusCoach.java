@@ -1,5 +1,5 @@
 package com.team.justice.api.enums;
 
-public enum StatusCouch {
+public enum StatusCoach {
 	ACTIVE, ARCHIVE
 }

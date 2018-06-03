@@ -20,7 +20,7 @@ public class Club implements Serializable {
 	@ManyToOne
 	Address address;
 	@ManyToMany(mappedBy = "clubs")
-	List<Couch> couches;
+	List<Coach> coaches;
 	@OneToMany(mappedBy = "club")
 	List<Athlete> athletes;
 
@@ -28,11 +28,11 @@ public class Club implements Serializable {
 		super();
 	}
 
-	public Club(ClubId id, Address address, List<Couch> couches, List<Athlete> athletes) {
+	public Club(ClubId id, Address address, List<Coach> coaches, List<Athlete> athletes) {
 		super();
 		this.id = id;
 		this.address = address;
-		this.couches = couches;
+		this.coaches = coaches;
 		this.athletes = athletes;
 	}
 
@@ -44,12 +44,12 @@ public class Club implements Serializable {
 		return address;
 	}
 
-	public List<Couch> getCouches() {
-		return couches;
+	public List<Coach> getCoaches() {
+		return coaches;
 	}
 
-	public void setCouches(List<Couch> couches) {
-		this.couches = couches;
+	public void setCoaches(List<Coach> coaches) {
+		this.coaches = coaches;
 	}
 
 	public List<Athlete> getAthletes() {
