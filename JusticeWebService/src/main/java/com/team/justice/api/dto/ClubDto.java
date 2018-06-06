@@ -2,11 +2,13 @@ package com.team.justice.api.dto;
 
 import java.util.List;
 
+import lombok.Getter;
+
+@Getter
 public class ClubDto {
 
-	public String title;
-	public String nameCity;
-	public AddressDto address;
+	public ClubIdDto clubIdDto;
+	public AddressDto addressDto;
 	public List<String> couchePassports;
 	public List<String> athleteNickNames;
 
@@ -14,34 +16,13 @@ public class ClubDto {
 		super();
 	}
 
-	public ClubDto(String title, String nameCity, AddressDto address, List<String> couchePassports,
+	public ClubDto(ClubIdDto clubIdDto, AddressDto addressDto, List<String> couchePassports,
 			List<String> athleteNickNames) {
 		super();
-		this.title = title;
-		this.nameCity = nameCity;
-		this.address = address;
+		this.clubIdDto = clubIdDto;
+		this.addressDto = addressDto;
 		this.couchePassports = couchePassports;
 		this.athleteNickNames = athleteNickNames;
-	}
-
-	public AddressDto getAddress() {
-		return address;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public String getNameCity() {
-		return nameCity;
-	}
-
-	public List<String> getCouchePassports() {
-		return couchePassports;
-	}
-
-	public List<String> getAthleteNickNames() {
-		return athleteNickNames;
 	}
 
 }

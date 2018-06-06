@@ -27,7 +27,7 @@ public class JusticeHandlerCoach implements IJusticeCouch, IJusticeCummon {
 			return ReturnCode.COACH_EXISTS;
 		}
 
-		ClubId clubId = new ClubId(coachDto.clubName, coachDto.city);
+		ClubId clubId = new ClubId(null, coachDto.city);
 		Club club = em.find(Club.class, clubId);
 		if (club == null) {
 			return ReturnCode.CLUB_NOT_FOUND;
@@ -73,11 +73,12 @@ public class JusticeHandlerCoach implements IJusticeCouch, IJusticeCummon {
 	@Override
 	@Transactional
 	public ReturnCode addNewClub(ClubDto clubDto) {
-		ClubId clubId = new ClubId(clubDto.title, clubDto.nameCity);
+
+		ClubId clubId = new ClubId(clubDto.clubIdDto.title, clubDto.clubIdDto.city);
 		if ((em.find(Club.class, clubId) != null)) {
 			return ReturnCode.CLUB_EXISTS;
 		}
-		AddressDto addressDto = clubDto.getAddress();
+		AddressDto addressDto = clubDto.addressDto;
 		// Address of ID search
 		CoordinatesId coordinatesId = new CoordinatesId(addressDto.lon, addressDto.lat);
 		Address address = em.find(Address.class, coordinatesId);
@@ -88,7 +89,7 @@ public class JusticeHandlerCoach implements IJusticeCouch, IJusticeCummon {
 		// Create new Club
 		List<Coach> coaches = Collections.emptyList();
 		List<Athlete> athletes = Collections.emptyList();
-		ClubId id = new ClubId(clubDto.title, clubDto.nameCity);
+		ClubId id = new ClubId(clubDto.clubIdDto.title, clubDto.clubIdDto.city);
 		Club club = new Club(id, address, coaches, athletes);
 		// Get list clubs from address and to add new Club in the list
 		List<Club> clubs = address.getClubs();
@@ -139,11 +140,12 @@ public class JusticeHandlerCoach implements IJusticeCouch, IJusticeCummon {
 			coach.setSkype(coachDto.skype);
 		}
 
-		ClubId clubId = new ClubId(coachDto.clubName, coachDto.city);
-		Club clubNew = em.find(Club.class, clubId);
+		Club clubNew = em.find(Club.class, coachDto.clubIdDto);
 		if (clubNew == null) {
 			return ReturnCode.CLUB_NOT_FOUND;
 		}
+		clubs.add(clubNew);
+		em.persist(coach);
 		return ReturnCode.OK;
 	}
 
