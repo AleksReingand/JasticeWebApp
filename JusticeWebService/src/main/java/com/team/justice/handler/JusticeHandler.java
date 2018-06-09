@@ -16,7 +16,7 @@ import com.team.justice.entities.*;
 import com.team.justice.interfaces.*;
 
 @Repository
-public class JusticeHandlerCoach implements IJusticeCouch, IJusticeCummon {
+public class JusticeHandler implements IJustice {
 	@PersistenceContext
 	EntityManager em;
 
@@ -275,6 +275,102 @@ public class JusticeHandlerCoach implements IJusticeCouch, IJusticeCummon {
 
 	@Override
 	public Iterable<ClubDto> showAllClubs() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TournamentDto showCurrentTourn() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Iterable<TournamentDto> comingAllTourn() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Iterable<TournamentDto> archiveTourn() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ReturnCode subscribeNews(String email, String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Iterable<AthleteDto> showAthletesOnStatRegistered() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ReturnCode changeStatAthleteOfArraved(String idAthlete) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ReturnCode addNewTournament(TournamentDto newTournamentDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Iterable<AthleteDto> showAthletesOnStatArraved() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ReturnCode sortAthlete(List<AthleteDto> athletesDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ReturnCode addMats(Integer mats) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Iterable<AthleteDto> manualChangeSort(List<AthleteDto> athletesDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ReturnCode deleteMat(Integer idMat) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TournamentDto embeddedCopyTourn(TournamentDto tournamentDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ReturnCode changeStatTournament(String idTournament) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MatDto showMat(Integer idMat) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Iterable<CoachDto> showAllCoaches() {
 		// TODO Auto-generated method stub
 		return null;
 	}
