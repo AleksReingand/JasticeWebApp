@@ -12,8 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.team.justice.api.dto.*;
 import com.team.justice.api.enums.*;
+import com.team.justice.converter.Converter;
 import com.team.justice.entities.*;
 import com.team.justice.interfaces.*;
+
+// The repository with functions for work with DB
 
 @Repository
 public class JusticeHandler implements IJustice {
@@ -22,13 +25,12 @@ public class JusticeHandler implements IJustice {
 
 	@Override
 	@Transactional
+	// function check coach, create new Coach and add to DB
 	public ReturnCode addNewCoach(CoachDto coachDto) {
 		if (em.find(Coach.class, coachDto.passport) != null) {
 			return ReturnCode.COACH_EXISTS;
 		}
-
-		ClubId clubId = new ClubId(null, coachDto.city);
-		Club club = em.find(Club.class, clubId);
+		Club club = em.find(Club.class, coachDto.clubIdDto);
 		if (club == null) {
 			return ReturnCode.CLUB_NOT_FOUND;
 		}
@@ -108,11 +110,6 @@ public class JusticeHandler implements IJustice {
 			return ReturnCode.COACH_NOT_FOUND;
 		}
 
-		return updateAndAddProfileCoach(coach, coachDto);
-
-	}
-
-	private ReturnCode updateAndAddProfileCoach(Coach coach, CoachDto coachDto) {
 		String city = coach.getCity();
 		String firstName = coach.getFirstName();
 		String secondName = coach.getSecondName();
@@ -233,23 +230,16 @@ public class JusticeHandler implements IJustice {
 	}
 
 	@Override
+	//function return list athletes for coach
 	public Iterable<AthleteDto> showAthletes(String pasport) {
 		Coach coach = em.find(Coach.class, pasport);
-		return coach.getAthletes().stream().map(x -> athleteToAthleteDto(x)).collect(Collectors.toList());
+		return coach.getAthletes().stream().map((Converter::entityToAthleteDto)).collect(Collectors.toList());
 	}
 
 	@Override
 	public AthleteDto showAthlete(String nickName) {
 		Athlete athlete = em.find(Athlete.class, nickName);
-		AthleteDto athleteDto = athleteToAthleteDto(athlete);
-		return athleteDto;
-	}
-
-	private AthleteDto athleteToAthleteDto(Athlete athlete) {
-		AthleteDto athleteDto = new AthleteDto(athlete.getNickName(), athlete.getPassport(), athlete.getFirstName(),
-				athlete.getSecondName(), athlete.getBirthday(), athlete.getPhone(), athlete.getEmail(),
-				athlete.isGender(), athlete.getWeigth(), athlete.getStatusAthlete(), athlete.getCoach().getPassport(),
-				athlete.getClub().getId().getTitle(), athlete.getClub().getAddress().getCity());
+		AthleteDto athleteDto = Converter.entityToAthleteDto(athlete);
 		return athleteDto;
 	}
 
@@ -268,8 +258,9 @@ public class JusticeHandler implements IJustice {
 			return ReturnCode.ADDRESS_EXISTS;
 		}
 		List<Club> clubs = Collections.emptyList();
+		List<Tournament> tournaments = Collections.emptyList();
 		em.persist(new Address(coordinatesId, addressDto.country, addressDto.city, addressDto.state, addressDto.street,
-				addressDto.building, addressDto.housing, clubs));
+				addressDto.building, addressDto.housing, clubs, tournaments));
 		return ReturnCode.OK;
 	}
 

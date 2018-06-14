@@ -29,13 +29,16 @@ public class Address implements Serializable {
 
 	@OneToMany(mappedBy = "address")
 	List<Club> clubs;
+	@OneToMany(mappedBy = "address")
+	List<Tournament> tournaments;
 
 	public Address() {
 		super();
 	}
 
-	public Address(CoordinatesId id, String country, String city, String state, String street, int building,
-			String housing, List<Club> clubs) {
+	public Address(CoordinatesId id, @NotNull String country, @NotNull String city, String state,
+			@NotNull String street, @NotNull int building, String housing, List<Club> clubs,
+			List<Tournament> tournaments) {
 		super();
 		this.id = id;
 		this.country = country;
@@ -45,6 +48,7 @@ public class Address implements Serializable {
 		this.building = building;
 		this.housing = housing;
 		this.clubs = clubs;
+		this.tournaments = tournaments;
 	}
 
 	public String getCountry() {
@@ -103,14 +107,45 @@ public class Address implements Serializable {
 		this.clubs = clubs;
 	}
 
+	public List<Tournament> getTournaments() {
+		return tournaments;
+	}
+
+	public void setTournaments(List<Tournament> tournaments) {
+		this.tournaments = tournaments;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
+	public CoordinatesId getId() {
+		return id;
+	}
+
 	@Override
-	public String toString() {
-		return "Address [country=" + country + ", city=" + city + ", state=" + state + ", street=" + street
-				+ ", building=" + building + ", housing=" + housing + ", clubs=" + clubs + "]";
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Address other = (Address) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 }
