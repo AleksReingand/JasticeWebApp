@@ -13,32 +13,32 @@ public class CoordinatesId implements Serializable {
 	 */
 	private static final long serialVersionUID = -5580580529205872269L;
 
-	double lon;
-	double lat;
+	Double lon;
+	Double lat;
 
 	public CoordinatesId() {
 		super();
 	}
 
-	public CoordinatesId(double lon, double lat) {
+	public CoordinatesId(Double lon, Double lat) {
 		super();
 		this.lon = lon;
 		this.lat = lat;
 	}
 
-	public double getLon() {
+	public Double getLon() {
 		return lon;
 	}
 
-	public void setLon(double lon) {
+	public void setLon(Double lon) {
 		this.lon = lon;
 	}
 
-	public double getLat() {
+	public Double getLat() {
 		return lat;
 	}
 
-	public void setLat(double lat) {
+	public void setLat(Double lat) {
 		this.lat = lat;
 	}
 

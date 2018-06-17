@@ -4,22 +4,21 @@ import java.util.List;
 
 public class AddressDto {
 
-	public double lon;
-	public double lat;
+	public Double lon;
+	public Double lat;
 	public String country;
 	public String city;
 	public String state;
 	public String street;
-	public int building;
+	public Integer building;
 	public String housing;
-	public List<String> titleClubs;
 
 	public AddressDto() {
 		super();
 	}
 
-	public AddressDto(double lon, double lat, String country, String city, String state, String street, int building,
-			String housing, List<String> titleClubs) {
+	public AddressDto(Double lon, Double lat, String country, String city, String state, String street, Integer building,
+			String housing) {
 		super();
 		this.lon = lon;
 		this.lat = lat;
@@ -29,14 +28,13 @@ public class AddressDto {
 		this.street = street;
 		this.building = building;
 		this.housing = housing;
-		this.titleClubs = titleClubs;
 	}
 
-	public double getLat() {
+	public Double getLat() {
 		return lat;
 	}
 
-	public double getLon() {
+	public Double getLon() {
 		return lon;
 	}
 
@@ -56,18 +54,12 @@ public class AddressDto {
 		return street;
 	}
 
-	public int getBuilding() {
+	public Integer getBuilding() {
 		return building;
 	}
 
 	public String getHousing() {
 		return housing;
 	}
-
-	public List<String> getTitleClubs() {
-		return titleClubs;
-	}
-
-	
 
 }

@@ -1,5 +1,6 @@
 package com.team.justice.api.dto;
 
+import com.team.justice.api.enums.StatusGender;
 import com.team.justice.api.enums.StatusAthlete;
 
 public class AthleteDto {
@@ -11,7 +12,7 @@ public class AthleteDto {
 	public String birthday;
 	public String phone;
 	public String email;
-	public boolean gender;
+	public StatusGender gender;
 	public double weigth;
 	public StatusAthlete statusAthlete;
 	public String passportCoach;
@@ -23,7 +24,7 @@ public class AthleteDto {
 	}
 
 	public AthleteDto(String nickName, String passport, String firstName, String secondName, String birthday,
-			String phone, String email, boolean gender, double weigth, StatusAthlete statusAthlete,
+			String phone, String email, StatusGender gender, double weigth, StatusAthlete statusAthlete,
 			String passportCoach, String clubName, String city) {
 		super();
 		this.nickName = nickName;
@@ -35,9 +36,9 @@ public class AthleteDto {
 		this.email = email;
 		this.gender = gender;
 		this.weigth = weigth;
+		this.statusAthlete = statusAthlete;
 		this.passportCoach = passportCoach;
 		this.clubName = clubName;
-		this.statusAthlete = statusAthlete;
 		this.city = city;
 	}
 
@@ -69,12 +70,16 @@ public class AthleteDto {
 		return email;
 	}
 
-	public boolean isGender() {
+	public StatusGender getGender() {
 		return gender;
 	}
 
 	public double getWeigth() {
 		return weigth;
+	}
+
+	public StatusAthlete getStatusAthlete() {
+		return statusAthlete;
 	}
 
 	public String getPassportCoach() {
@@ -83,10 +88,6 @@ public class AthleteDto {
 
 	public String getClubName() {
 		return clubName;
-	}
-
-	public StatusAthlete getStatusAthlete() {
-		return statusAthlete;
 	}
 
 	public String getCity() {

@@ -1,11 +1,18 @@
 package com.team.justice.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 
+import com.team.justice.api.enums.StatusGender;
+
+import lombok.*;
+
 import com.team.justice.api.enums.StatusAthlete;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "athletes")
 public class Athlete implements Serializable {
@@ -15,154 +22,49 @@ public class Athlete implements Serializable {
 	 */
 	private static final long serialVersionUID = 6661840799693435426L;
 	@Id
+	@Getter
 	String nickName;
+	@Getter
+	@Setter
 	String passport;
+	@Getter
+	@Setter
 	String firstName;
+	@Getter
+	@Setter
 	String secondName;
+	@Getter
 	String birthday;
+	@Getter
+	@Setter
 	String phone;
+	@Getter
+	@Setter
 	String email;
-	boolean gender;
-	double weigth;
+	@Getter
+	StatusGender gender;
+	@Getter
+	@Setter
+	Double weigth;
+	@Getter
+	@Setter
 	@Enumerated(EnumType.STRING)
 	StatusAthlete statusAthlete;
+	@Getter
+	@Setter
 	@ManyToOne
 	Coach coach;
+	@Getter
+	@Setter
 	@ManyToOne
 	Club club;
-
-	public Athlete() {
-		super();
-	}
-
-	public Athlete(String nickName, String passport, String firstName, String secondName, String birthday, String phone,
-			String email, boolean gender, double weigth, StatusAthlete statusAthlete, Coach coach, Club club) {
-		super();
-		this.nickName = nickName;
-		this.passport = passport;
-		this.firstName = firstName;
-		this.secondName = secondName;
-		this.birthday = birthday;
-		this.phone = phone;
-		this.email = email;
-		this.gender = gender;
-		this.weigth = weigth;
-		this.statusAthlete = statusAthlete;
-		this.coach = coach;
-		this.club = club;
-	}
-
-	public String getPassport() {
-		return passport;
-	}
-
-	public void setPassport(String passport) {
-		this.passport = passport;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getSecondName() {
-		return secondName;
-	}
-
-	public void setSecondName(String secondName) {
-		this.secondName = secondName;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public double getWeigth() {
-		return weigth;
-	}
-
-	public void setWeigth(double weigth) {
-		this.weigth = weigth;
-	}
-
-	public StatusAthlete getStatusAthlete() {
-		return statusAthlete;
-	}
-
-	public void setStatusAthlete(StatusAthlete statusAthlete) {
-		this.statusAthlete = statusAthlete;
-	}
-
-	public Coach getCoach() {
-		return coach;
-	}
-
-	public void setCoach(Coach coach) {
-		this.coach = coach;
-	}
-
-	public Club getClub() {
-		return club;
-	}
-
-	public void setClub(Club club) {
-		this.club = club;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public String getNickName() {
-		return nickName;
-	}
-
-	public String getBirthday() {
-		return birthday;
-	}
-
-	public boolean isGender() {
-		return gender;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((nickName == null) ? 0 : nickName.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Athlete other = (Athlete) obj;
-		if (nickName == null) {
-			if (other.nickName != null)
-				return false;
-		} else if (!nickName.equals(other.nickName))
-			return false;
-		return true;
-	}
+	@Getter
+	@Setter
+	@ManyToMany
+	List<Administrator> administrators;
+	@Getter
+	@Setter
+	@OneToMany(mappedBy = "athlete")
+	List<Fight> fights;
 
 }

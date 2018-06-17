@@ -38,7 +38,7 @@ public class Tournament implements Serializable {
 	@ManyToOne
 	Judo judo;
 	@ManyToMany
-	Administrator administrator;
+	List<Administrator> administrators;
 	@OneToMany(mappedBy = "tournament")
 	List<Fight> fights;
 	@OneToMany(mappedBy = "tournament")

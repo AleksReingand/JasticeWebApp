@@ -29,13 +29,16 @@ public class Coach implements Serializable {
 	List<Athlete> athletes;
 	@Enumerated(EnumType.STRING)
 	StatusCoach statusCoach;
+	@ManyToMany
+	List<Administrator> administrators;
 
 	public Coach() {
 		super();
 	}
 
 	public Coach(String passport, String city, String firstName, String secondName, String phone, String email,
-			String skype, List<Club> clubs, List<Athlete> athletes, StatusCoach statusCoach) {
+			String skype, List<Club> clubs, List<Athlete> athletes, StatusCoach statusCoach,
+			List<Administrator> administrators) {
 		super();
 		this.passport = passport;
 		this.city = city;
@@ -47,6 +50,7 @@ public class Coach implements Serializable {
 		this.clubs = clubs;
 		this.athletes = athletes;
 		this.statusCoach = statusCoach;
+		this.administrators = administrators;
 	}
 
 	public String getCity() {
@@ -127,6 +131,14 @@ public class Coach implements Serializable {
 
 	public String getPassport() {
 		return passport;
+	}
+
+	public List<Administrator> getAdministrators() {
+		return administrators;
+	}
+
+	public void setAdministrators(List<Administrator> administrators) {
+		this.administrators = administrators;
 	}
 
 	@Override

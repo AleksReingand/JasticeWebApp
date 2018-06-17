@@ -39,7 +39,7 @@ public class JusticeHandler implements IJustice {
 		// TODO check list clubs
 		clubs.add(club);
 		em.persist(new Coach(coachDto.passport, coachDto.city, coachDto.firstName, coachDto.secondName, coachDto.phone,
-				coachDto.email, coachDto.skype, clubs, athletes, StatusCoach.ACTIVE));
+				coachDto.email, coachDto.skype, clubs, athletes, StatusCoach.ACTIVE, null));
 		return ReturnCode.OK;
 	}
 
@@ -59,10 +59,15 @@ public class JusticeHandler implements IJustice {
 		Coach coach = em.find(Coach.class, athleteDto.passportCoach);
 		// get list athletes from club
 		List<Athlete> athletes = club.getAthletes();
+		// create empty list administrators
+		List<Administrator> administrators = Collections.emptyList();
+		// create empty list fights
+		List<Fight> fights = Collections.emptyList();
 		// create new athlete
-		Athlete athlete = new Athlete(athleteDto.nickName, athleteDto.passport, athleteDto.firstName,
-				athleteDto.secondName, athleteDto.birthday, athleteDto.phone, athleteDto.email, athleteDto.gender,
-				athleteDto.weigth, StatusAthlete.ACTIVE, coach, club);
+		Athlete athlete = new Athlete(athleteDto.getNickName(), athleteDto.getPassport(), athleteDto.getFirstName(),
+				athleteDto.getSecondName(), athleteDto.getBirthday(), athleteDto.getPhone(), athleteDto.getEmail(),
+				athleteDto.getGender(), athleteDto.getWeigth(), athleteDto.getStatusAthlete(), coach, club,
+				administrators, fights);
 		// athlete to add in list
 		athletes.add(athlete);
 		// change list club's
@@ -230,7 +235,7 @@ public class JusticeHandler implements IJustice {
 	}
 
 	@Override
-	//function return list athletes for coach
+	// function return list athletes for coach
 	public Iterable<AthleteDto> showAthletes(String pasport) {
 		Coach coach = em.find(Coach.class, pasport);
 		return coach.getAthletes().stream().map((Converter::entityToAthleteDto)).collect(Collectors.toList());
@@ -259,8 +264,9 @@ public class JusticeHandler implements IJustice {
 		}
 		List<Club> clubs = Collections.emptyList();
 		List<Tournament> tournaments = Collections.emptyList();
-		em.persist(new Address(coordinatesId, addressDto.country, addressDto.city, addressDto.state, addressDto.street,
-				addressDto.building, addressDto.housing, clubs, tournaments));
+		em.persist(new Address(new CoordinatesId(addressDto.getLon(), addressDto.getLat()), addressDto.getCountry(),
+				addressDto.getCity(), addressDto.getState(), addressDto.getStreet(), addressDto.getBuilding(),
+				addressDto.getHousing(), clubs, tournaments));
 		return ReturnCode.OK;
 	}
 
