@@ -7,9 +7,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
@@ -20,7 +22,9 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 2292802167908913667L;
 	@Id
 	String email;
+	@Setter
 	String name;
+	@Setter
 	@ManyToOne
 	Administrator administrator;
 

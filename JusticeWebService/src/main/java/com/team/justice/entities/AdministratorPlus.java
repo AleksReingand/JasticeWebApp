@@ -5,9 +5,11 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 @Entity
 @Table(name = "adminPlus")
 public class AdministratorPlus implements Serializable {
@@ -17,8 +19,9 @@ public class AdministratorPlus implements Serializable {
 	private static final long serialVersionUID = -834552631377943113L;
 	@Id
 	String name;
+	@Setter
 	String password;
-	
+	@Setter
 	@OneToMany(mappedBy = "administratorPlus")
 	List<Administrator> administrators;
 

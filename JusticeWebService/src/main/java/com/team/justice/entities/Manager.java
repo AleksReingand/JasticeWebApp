@@ -8,22 +8,27 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 @Entity
 @Table(name = "managers")
-public class Manager implements Serializable{
+public class Manager implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7919950489276008069L;
 	@Id
 	String email;
+	@Setter
 	String firstName;
+	@Setter
 	String secondName;
+	@Setter
 	String phone;
-
+	@Setter
 	@ManyToMany
 	List<Administrator> administrators;
 

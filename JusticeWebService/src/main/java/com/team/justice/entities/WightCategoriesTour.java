@@ -4,11 +4,13 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 @Entity
-@Table(name = "weight categories")
+@Table(name = "weight_categories")
 public class WightCategoriesTour implements Serializable {
 
 	/**
@@ -18,7 +20,7 @@ public class WightCategoriesTour implements Serializable {
 
 	@Id
 	String nameCategory;
-
+	@Setter
 	@ManyToOne
 	Tournament tournament;
 }

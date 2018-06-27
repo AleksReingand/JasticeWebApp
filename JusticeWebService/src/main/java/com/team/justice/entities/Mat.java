@@ -5,9 +5,11 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 @Entity
 @Table(name = "mats")
 public class Mat implements Serializable {
@@ -21,10 +23,12 @@ public class Mat implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-
+	@Setter
 	Integer number;
+	@Setter
 	@OneToMany(mappedBy = "mat")
 	List<Fight> fights;
+	@Setter
 	@OneToOne(mappedBy = "mat")
 	Operator operator;
 }

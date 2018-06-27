@@ -4,9 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 @Entity
 @Table(name = "operators")
 public class Operator implements Serializable {
@@ -19,9 +21,11 @@ public class Operator implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-
+	@Setter
 	Integer number;
+	@Setter
 	String name;
+	@Setter
 	@OneToOne
 	Mat mat;
 

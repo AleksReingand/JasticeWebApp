@@ -8,9 +8,11 @@ import javax.persistence.*;
 
 import com.team.justice.api.enums.StatusTournament;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
 @Entity
 @Table(name = "tournaments")
 public class Tournament implements Serializable {
@@ -22,25 +24,34 @@ public class Tournament implements Serializable {
 	@Column
 	@EmbeddedId
 	private TournamentId tournamentId;
-
+	@Setter
 	String title;
+	@Setter
 	ZonedDateTime dateAndTime;
+	@Setter
 	Integer mat;
+	@Setter
 	@Enumerated(EnumType.STRING)
 	StatusTournament stutus;
-
+	@Setter
 	@OneToMany(mappedBy = "tournament")
 	List<TourAthlete> tourAthletes;
+	@Setter
 	@ManyToOne
 	Address address;
+	@Setter
 	@ManyToOne
 	Sambo sambo;
+	@Setter
 	@ManyToOne
 	Judo judo;
+	@Setter
 	@ManyToMany
 	List<Administrator> administrators;
+	@Setter
 	@OneToMany(mappedBy = "tournament")
 	List<Fight> fights;
+	@Setter
 	@OneToMany(mappedBy = "tournament")
 	List<WightCategoriesTour> wightCategoriesTour;
 
